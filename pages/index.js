@@ -27,16 +27,22 @@ export default function Home ({ questions }) {
         body: JSON.stringify({ nickname, email, score })
       })
       console.log('Finished')
-      // setGameStart(false)
-      // setNickname('')
-      // setEmail('')
-      // setScore(0)
-      // setActiveQuestion(0)
+
       fetchQuestions()
       setGameFinished(true)
     }
     console.log(activeQuestion)
   }, [activeQuestion])
+
+  const resetHandler = () => {
+    console.log('test')
+    setGameStart(false)
+    setGameFinished(false)
+    setNickname('')
+    setEmail('')
+    setScore(0)
+    setActiveQuestion(0)
+  }
 
   const handleGameStatus = () => {
     setGameStart(true)
@@ -95,10 +101,16 @@ export default function Home ({ questions }) {
               currentQuestion={finalQuestionSet[activeQuestion]}
               activeQuestion={activeQuestion}
               setActiveQuestion={setActiveQuestion}
+              setScore={setScore}
+              score={score}
             />
           </>
         ) : (
-          <FinalScore finalScore={score} nickname={nickname} />
+          <FinalScore
+            finalScore={score}
+            nickname={nickname}
+            resetHandler={resetHandler}
+          />
         )}
       </main>
     </div>
