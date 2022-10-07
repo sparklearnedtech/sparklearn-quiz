@@ -5,6 +5,7 @@ import Questions from '../components/Questions'
 import styles from '../styles/Home.module.scss'
 import { useState, useEffect } from 'react'
 import CurrentScore from '../components/CurrentScore'
+import FinalScore from '../components/FinalScore'
 
 export default function Home ({ questions }) {
   const [finalQuestionSet, setFinalQuestionSet] = useState({})
@@ -13,6 +14,7 @@ export default function Home ({ questions }) {
   const [nickname, setNickname] = useState('')
   const [score, setScore] = useState(0)
   const [gameStart, setGameStart] = useState(false)
+  const [gameFinished, setGameFinished] = useState(false)
 
   useEffect(() => {
     fetchQuestions()
@@ -25,12 +27,13 @@ export default function Home ({ questions }) {
         body: JSON.stringify({ nickname, email, score })
       })
       console.log('Finished')
-      setGameStart(false)
-      setNickname('')
-      setEmail('')
-      setScore(0)
-      setActiveQuestion(0)
+      // setGameStart(false)
+      // setNickname('')
+      // setEmail('')
+      // setScore(0)
+      // setActiveQuestion(0)
       fetchQuestions()
+      setGameFinished(true)
     }
     console.log(activeQuestion)
   }, [activeQuestion])
@@ -77,7 +80,7 @@ export default function Home ({ questions }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
-        {!gameStart ? (
+        {!gameStart && !gameFinished ? (
           <Register
             nickname={nickname}
             email={email}
@@ -85,7 +88,7 @@ export default function Home ({ questions }) {
             setEmail={setEmail}
             setNickname={setNickname}
           />
-        ) : (
+        ) : !gameFinished ? (
           <>
             <CurrentScore nickname={nickname} score={score} />
             <Questions
@@ -94,6 +97,8 @@ export default function Home ({ questions }) {
               setActiveQuestion={setActiveQuestion}
             />
           </>
+        ) : (
+          <FinalScore finalScore={score} nickname={nickname} />
         )}
       </main>
     </div>
