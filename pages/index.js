@@ -11,6 +11,32 @@ export default function Home ({ questions }) {
   const [activeQuestion, setActiveQuestion] = useState(0)
 
   useEffect(() => {
+    fetchQuestions()
+  }, [])
+
+  useEffect(() => {
+    if (activeQuestion >= 9) {
+      console.log('Finished')
+      setGameStart(false)
+      setNickname('')
+      setEmail('')
+      setScore(0)
+      setActiveQuestion(0)
+      fetchQuestions()
+    }
+    console.log(activeQuestion)
+  }, [activeQuestion])
+
+  const [email, setEmail] = useState('')
+  const [nickname, setNickname] = useState('')
+  const [score, setScore] = useState('')
+  const [gameStart, setGameStart] = useState(false)
+
+  const handleGameStatus = () => {
+    setGameStart(true)
+  }
+
+  const fetchQuestions = () => {
     let questionSet = []
 
     const baseIndex = Math.floor(Math.random() * questions.length)
@@ -37,15 +63,6 @@ export default function Home ({ questions }) {
     }
 
     setFinalQuestionSet(questionSet)
-  }, [])
-
-  const [email, setEmail] = useState('')
-  const [nickname, setNickname] = useState('')
-  const [score, setScore] = useState('')
-  const [gameStart, setGameStart] = useState(false)
-
-  const handleGameStatus = () => {
-    setGameStart(true)
   }
 
   // console.log(finalQuestionSet[0]);
