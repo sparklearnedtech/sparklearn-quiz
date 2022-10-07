@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function Leaderboard ({ topPlayers }) {
-  console.log(topPlayers)
+  if(!topPlayers.length) return
   return (
     <div className='leaderboard-area'>
       <table>
