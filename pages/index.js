@@ -5,7 +5,9 @@ import Questions from '../components/Questions'
 import styles from '../styles/Home.module.scss'
 import { useState, useEffect } from 'react'
 import CurrentScore from '../components/CurrentScore'
+import io from 'Socket.IO-client'
 
+let socket
 export default function Home ({ questions }) {
   const [finalQuestionSet, setFinalQuestionSet] = useState({})
   const [activeQuestion, setActiveQuestion] = useState(0)
@@ -14,9 +16,20 @@ export default function Home ({ questions }) {
   const [score, setScore] = useState(0)
   const [gameStart, setGameStart] = useState(false)
 
-  useEffect(() => {
-    fetchQuestions()
-  }, [])
+  // useEffect(() => {
+  fetch('/api/socket')
+  socket = io()
+  socket.on('connect', () => {
+    console.log('connected')
+  })
+  socket.on('server', msg => {
+    console.log(msg)
+  })
+  socket.onAny('hello', msg => {
+    console.log(msg)
+  })
+  // fetchQuestions()
+  // }, [])
 
   useEffect(() => {
     if (activeQuestion >= 9) {

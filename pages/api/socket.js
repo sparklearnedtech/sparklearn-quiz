@@ -1,17 +1,25 @@
-import WebSocket, { WebSocketServer } from 'ws'
+import { Server } from 'Socket.IO'
 
-export default function handler (req, res) {
-  try {
-    const wss = new WebSocketServer({
-      port: 8080
+const SocketHandler = (req, res) => {
+  if (res.socket.server.io) {
+    console.log('Socket is already running')
+    res.socket.on('sdfdgfd', msg => {
+      console.log(msg)
     })
-
-    wss.on('connection', function connection (ws) {
-      ws.on('message', function message (data) {
-        console.log('received: %s', data)
-        ws.send(`server: ${data}`)
+  } else {
+    console.log('Socket is initializing')
+    const io = new Server(res.socket.server)
+    io.on('connection', socket => {
+      socket.on('hello', arg => {
+        console.log(arg) // world
+        socket.emit('server', 'im your server')
       })
+      socket.emit('server', 'this is from server')
+      console.log(socket.id) // x8WIv7-mJelg7on_ALbx
     })
-  } catch (error) {}
+    res.socket.server.io = io
+  }
   res.end()
 }
+
+export default SocketHandler
