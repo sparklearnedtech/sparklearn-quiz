@@ -7,8 +7,11 @@ import { useState, useEffect } from 'react'
 
 export default function Home ({ questions }) {
   const [finalQuestionSet, setFinalQuestionSet] = useState({})
-
   const [activeQuestion, setActiveQuestion] = useState(0)
+  const [email, setEmail] = useState('')
+  const [nickname, setNickname] = useState('')
+  const [score, setScore] = useState(0)
+  const [gameStart, setGameStart] = useState(false)
 
   useEffect(() => {
     fetchQuestions()
@@ -16,6 +19,10 @@ export default function Home ({ questions }) {
 
   useEffect(() => {
     if (activeQuestion >= 9) {
+      fetch('/api/save', {
+        method: 'POST',
+        body: JSON.stringify({ nickname, email, score })
+      })
       console.log('Finished')
       setGameStart(false)
       setNickname('')
@@ -26,11 +33,6 @@ export default function Home ({ questions }) {
     }
     console.log(activeQuestion)
   }, [activeQuestion])
-
-  const [email, setEmail] = useState('')
-  const [nickname, setNickname] = useState('')
-  const [score, setScore] = useState('')
-  const [gameStart, setGameStart] = useState(false)
 
   const handleGameStatus = () => {
     setGameStart(true)
