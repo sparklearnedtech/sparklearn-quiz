@@ -31,6 +31,10 @@ a {
   justify-content: center;
 }
 
+.j-content-end {
+  justify-content: end;
+}
+
 form {
   display: grid;
 
@@ -59,4 +63,74 @@ button {
   background-color: rgb(7, 95, 146);
   padding: 50px 30px;
   border-radius: 30px;
+}
+
+.btn-correct,
+.btn-wrong,
+.btn-previous,
+.btn-next {
+  margin: 4px;
+  padding: 12px 20px;
+  width: 8rem;
+  border-radius: 30px;
+}
+
+.btn-correct {
+  background-color: rgb(12, 241, 12);
+  transition: 0.3s all ease-in-out;
+}
+
+.btn-wrong {
+  background-color: rgb(219, 37, 24);
+  transition: 0.3s all ease-in-out;
+}
+
+.btn-previous {
+  background-color: rgb(56, 183, 226);
+  transition: 0.3s all ease-in-out;
+}
+
+.btn-next {
+  background-color: rgb(8, 103, 135);
+  transition: 0.3s all ease-in-out;
+}
+
+.btn-correct:hover {
+  background-color: rgb(6, 132, 6);
+  transition: 0.3s all ease-in-out;
+}
+
+.btn-wrong:hover {
+  background-color: rgb(118, 18, 11);
+  transition: 0.3s all ease-in-out;
+}
+
+.btn-previous:hover {
+  background-color: rgb(13, 101, 130);
+  transition: 0.3s all ease-in-out;
+}
+
+.btn-next:hover {
+  background-color: rgb(2, 42, 55);
+  transition: 0.3s all ease-in-out;
+}
+
+.final-score-area {
+  margin: 0 !important;
+  position: absolute;
+  top: 0;
+  right: 30px;
+  // text-align: right;
+}
+
+.head-nickname,
+.head-score {
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 60px 20px 20px 30px;
+}
+
+.head-score {
+  padding: 10px 20px;
+  margin: 0;
 }
