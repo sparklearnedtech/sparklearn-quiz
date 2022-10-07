@@ -4,6 +4,7 @@ import Register from '../components/Register'
 import Questions from '../components/Questions'
 import styles from '../styles/Home.module.scss'
 import { useState, useEffect } from 'react'
+import CurrentScore from '../components/CurrentScore'
 
 export default function Home ({ questions }) {
   const [finalQuestionSet, setFinalQuestionSet] = useState({})
@@ -41,7 +42,7 @@ export default function Home ({ questions }) {
 
   const [email, setEmail] = useState('')
   const [nickname, setNickname] = useState('')
-  const [score, setScore] = useState('')
+  const [score, setScore] = useState(0)
   const [gameStart, setGameStart] = useState(false)
 
   const handleGameStatus = () => {
@@ -66,11 +67,14 @@ export default function Home ({ questions }) {
             setNickname={setNickname}
           />
         ) : (
-          <Questions
-            currentQuestion={finalQuestionSet[activeQuestion]}
-            activeQuestion={activeQuestion}
-            setActiveQuestion={setActiveQuestion}
-          />
+          <>
+            <CurrentScore nickname={nickname} score={score} />
+            <Questions
+              currentQuestion={finalQuestionSet[activeQuestion]}
+              activeQuestion={activeQuestion}
+              setActiveQuestion={setActiveQuestion}
+            />
+          </>
         )}
       </main>
     </div>
@@ -82,77 +86,92 @@ export async function getServerSideProps (context) {
     {
       id: 0,
       question:
-        'Q1 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias'
+        'Q1 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
+      score: 2
     },
     {
       id: 1,
       question:
-        'Q2  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias'
+        'Q2  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
+      score: 1
     },
     {
       id: 2,
       question:
-        'Q3  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias'
+        'Q3  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
+      score: 3
     },
     {
       id: 3,
       question:
-        'Q4  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias'
+        'Q4  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
+      score: 1
     },
     {
       id: 4,
       question:
-        'Q5  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias'
+        'Q5  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
+      score: 2
     },
     {
       id: 5,
       question:
-        'Q6  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias'
+        'Q6  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
+      score: 1
     },
     {
       id: 6,
       question:
-        'Q7  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias'
+        'Q7  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
+      score: 2
     },
     {
       id: 7,
       question:
-        'Q8  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias'
+        'Q8  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
+      score: 2
     },
     {
       id: 8,
       question:
-        'Q9  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias'
+        'Q9  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
+      score: 3
     },
     {
       id: 9,
       question:
-        'Q10  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias'
+        'Q10  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
+      score: 3
     },
     {
       id: 10,
       question:
-        'Q11  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias'
+        'Q11  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
+      score: 4
     },
     {
       id: 11,
       question:
-        'Q12  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias'
+        'Q12  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
+      score: 1
     },
     {
       id: 12,
       question:
-        'Q13  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias'
+        'Q13  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
+      score: 1
     },
     {
       id: 13,
       question:
-        'Q14  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias'
+        'Q14  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
+      score: 1
     },
     {
       id: 14,
       question:
-        'Q15  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias'
+        'Q15  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
+      score: 3
     }
   ]
 
