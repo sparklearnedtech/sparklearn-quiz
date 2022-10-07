@@ -35,7 +35,25 @@ export default function Home ({ questions }) {
       console.log('connected')
     })
     socket.on('server', msg => {
-      console.log(msg)
+      switch (msg) {
+        case 'correct':
+          setActiveQuestion(activeQuestion + 1)
+          setScore(score + currentQuestion.score)
+          break
+
+        case 'wrong':
+          setActiveQuestion(activeQuestion + 1)
+          break
+
+        case 'previous':
+          break
+
+        case 'next':
+          break
+
+        default:
+          break
+      }
     })
     fetchQuestions()
     fetchLeaderboard()
@@ -108,7 +126,7 @@ export default function Home ({ questions }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
-        <Leaderboard topPlayers={leaderboard} />
+        {/* <Leaderboard topPlayers={leaderboard} /> */}
         {!gameStart && !gameFinished ? (
           <Register
             nickname={nickname}
