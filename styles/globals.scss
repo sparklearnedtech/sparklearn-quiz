@@ -81,6 +81,10 @@ button {
   color: #bf2c2c;
 }
 
+.w-100 {
+  min-width: 5rem;
+}
+
 .card {
   background-color: rgb(7, 95, 146);
   padding: 50px 30px;
@@ -155,6 +159,24 @@ button {
 .btn-next:hover {
   background-color: rgb(2, 42, 55);
   transition: 0.3s all ease-in-out;
+}
+
+.leaderboard-area {
+  position: absolute;
+  left: 30px;
+  top: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 14px 45px 33px 30px;
+
+  ol {
+    margin: 0;
+    padding: 40px;
+
+    li {
+      margin-left: 15px;
+    }
+  }
 }
 
 .final-score-area {
