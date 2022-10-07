@@ -6,6 +6,8 @@ import styles from '../styles/Home.module.scss'
 import { useState, useEffect } from 'react'
 import CurrentScore from '../components/CurrentScore'
 import io from 'Socket.IO-client'
+import FinalScore from '../components/FinalScore'
+import Leaderboard from '../components/Leaderboard'
 
 let socket
 export default function Home ({ questions }) {
@@ -15,6 +17,16 @@ export default function Home ({ questions }) {
   const [nickname, setNickname] = useState('')
   const [score, setScore] = useState(0)
   const [gameStart, setGameStart] = useState(false)
+  const [gameFinished, setGameFinished] = useState(false)
+
+  const [leaderboard, setLeaderboard] = useState({})
+
+  const fetchLeaderboard = async () => {
+    const result = await fetch('/api/leaderboard')
+
+    const data = await result.json()
+    setLeaderboard(data)
+  }
 
   useEffect(() => {
     fetch('/api/socket')
@@ -26,6 +38,7 @@ export default function Home ({ questions }) {
       console.log(msg)
     })
     fetchQuestions()
+    fetchLeaderboard()
   }, [])
 
   useEffect(() => {
@@ -35,15 +48,23 @@ export default function Home ({ questions }) {
         body: JSON.stringify({ nickname, email, score })
       })
       console.log('Finished')
-      setGameStart(false)
-      setNickname('')
-      setEmail('')
-      setScore(0)
-      setActiveQuestion(0)
+
       fetchQuestions()
+      setGameFinished(true)
     }
     console.log(activeQuestion)
   }, [activeQuestion])
+
+  const resetHandler = () => {
+    console.log('test')
+    setGameStart(false)
+    setGameFinished(false)
+    setNickname('')
+    setEmail('')
+    setScore(0)
+    setActiveQuestion(0)
+    fetchLeaderboard()
+  }
 
   const handleGameStatus = () => {
     setGameStart(true)
@@ -87,7 +108,8 @@ export default function Home ({ questions }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
-        {!gameStart ? (
+        <Leaderboard topPlayers={leaderboard} />
+        {!gameStart && !gameFinished ? (
           <Register
             nickname={nickname}
             email={email}
@@ -95,15 +117,23 @@ export default function Home ({ questions }) {
             setEmail={setEmail}
             setNickname={setNickname}
           />
-        ) : (
+        ) : !gameFinished ? (
           <>
             <CurrentScore nickname={nickname} score={score} />
             <Questions
               currentQuestion={finalQuestionSet[activeQuestion]}
               activeQuestion={activeQuestion}
               setActiveQuestion={setActiveQuestion}
+              setScore={setScore}
+              score={score}
             />
           </>
+        ) : (
+          <FinalScore
+            finalScore={score}
+            nickname={nickname}
+            resetHandler={resetHandler}
+          />
         )}
       </main>
     </div>

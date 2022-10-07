@@ -23,8 +23,26 @@ a {
   box-sizing: border-box;
 }
 
+.d-block {
+  display: block;
+}
+
 .d-flex {
   display: flex;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .j-content-center {
@@ -59,10 +77,25 @@ button {
   border-radius: 20px;
 }
 
+.points {
+  color: #bf2c2c;
+}
+
+.w-100 {
+  min-width: 5rem;
+}
+
 .card {
   background-color: rgb(7, 95, 146);
   padding: 50px 30px;
   border-radius: 30px;
+}
+
+.q-card {
+  background-color: rgb(255 235 190);
+  padding: 50px 30px;
+  border-radius: 30px;
+  margin: 20px;
 }
 
 .btn-correct,
@@ -71,7 +104,7 @@ button {
 .btn-next {
   margin: 4px;
   padding: 12px 20px;
-  width: 8rem;
+  width: 15rem;
   border-radius: 30px;
 }
 
@@ -95,6 +128,19 @@ button {
   transition: 0.3s all ease-in-out;
 }
 
+.btn-reset {
+  background-color: rgb(21 52 147);
+  transition: 0.3s all ease-in-out;
+  margin: 4px;
+  margin-top: 20px;
+  padding: 15px 30px;
+}
+
+.btn-reset:hover {
+  background-color: rgb(12, 34, 99);
+  transition: 0.3s all ease-in-out;
+}
+
 .btn-correct:hover {
   background-color: rgb(6, 132, 6);
   transition: 0.3s all ease-in-out;
@@ -115,12 +161,40 @@ button {
   transition: 0.3s all ease-in-out;
 }
 
+.leaderboard-area {
+  position: absolute;
+  left: 30px;
+  top: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 14px 45px 33px 30px;
+
+  ol {
+    margin: 0;
+    padding: 40px;
+
+    li {
+      margin-left: 15px;
+    }
+  }
+}
+
 .final-score-area {
+  text-align: center;
+  border-radius: 30px;
+  padding: 10px;
+  background-color: rgb(133, 179, 224);
+
+  h1 {
+    font-size: 10vh;
+  }
+}
+
+.current-score-area {
   margin: 0 !important;
   position: absolute;
   top: 0;
   right: 30px;
-  // text-align: right;
 }
 
 .head-nickname,
@@ -133,4 +207,8 @@ button {
 .head-score {
   padding: 10px 20px;
   margin: 0;
+}
+
+.score-title {
+  color: white;
 }
