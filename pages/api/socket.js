@@ -12,9 +12,9 @@ const SocketHandler = (req, res) => {
     io.on('connection', socket => {
       socket.on('hello', arg => {
         console.log(arg) // world
-        socket.emit('server', 'im your server')
+        io.emit('server', arg)
       })
-      socket.emit('server', 'this is from server')
+      // socket.emit('server', 'this is from server')
       console.log(socket.id) // x8WIv7-mJelg7on_ALbx
     })
     res.socket.server.io = io

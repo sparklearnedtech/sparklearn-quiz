@@ -16,20 +16,17 @@ export default function Home ({ questions }) {
   const [score, setScore] = useState(0)
   const [gameStart, setGameStart] = useState(false)
 
-  // useEffect(() => {
-  fetch('/api/socket')
-  socket = io()
-  socket.on('connect', () => {
-    console.log('connected')
-  })
-  socket.on('server', msg => {
-    console.log(msg)
-  })
-  socket.onAny('hello', msg => {
-    console.log(msg)
-  })
-  // fetchQuestions()
-  // }, [])
+  useEffect(() => {
+    fetch('/api/socket')
+    socket = io()
+    socket.on('connect', () => {
+      console.log('connected')
+    })
+    socket.on('server', msg => {
+      console.log(msg)
+    })
+    fetchQuestions()
+  }, [])
 
   useEffect(() => {
     if (activeQuestion >= 9) {
