@@ -7,10 +7,11 @@ export default function Questions ({
 }) {
   console.log(currentQuestion)
   return (
-    <div>
-      {currentQuestion.question}
+    <div className='text-center'>
+      <h3 className='d-block'>{currentQuestion.question}</h3>
 
       <button
+        className='d-block mx-auto'
         onClick={() => {
           setActiveQuestion(activeQuestion + 1)
         }}
