@@ -8,10 +8,38 @@ import CurrentScore from '../components/CurrentScore'
 
 export default function Home ({ questions }) {
   const [finalQuestionSet, setFinalQuestionSet] = useState({})
-
   const [activeQuestion, setActiveQuestion] = useState(0)
+  const [email, setEmail] = useState('')
+  const [nickname, setNickname] = useState('')
+  const [score, setScore] = useState(0)
+  const [gameStart, setGameStart] = useState(false)
 
   useEffect(() => {
+    fetchQuestions()
+  }, [])
+
+  useEffect(() => {
+    if (activeQuestion >= 9) {
+      fetch('/api/save', {
+        method: 'POST',
+        body: JSON.stringify({ nickname, email, score })
+      })
+      console.log('Finished')
+      setGameStart(false)
+      setNickname('')
+      setEmail('')
+      setScore(0)
+      setActiveQuestion(0)
+      fetchQuestions()
+    }
+    console.log(activeQuestion)
+  }, [activeQuestion])
+
+  const handleGameStatus = () => {
+    setGameStart(true)
+  }
+
+  const fetchQuestions = () => {
     let questionSet = []
 
     const baseIndex = Math.floor(Math.random() * questions.length)
@@ -38,15 +66,6 @@ export default function Home ({ questions }) {
     }
 
     setFinalQuestionSet(questionSet)
-  }, [])
-
-  const [email, setEmail] = useState('')
-  const [nickname, setNickname] = useState('')
-  const [score, setScore] = useState(0)
-  const [gameStart, setGameStart] = useState(false)
-
-  const handleGameStatus = () => {
-    setGameStart(true)
   }
 
   // console.log(finalQuestionSet[0]);
