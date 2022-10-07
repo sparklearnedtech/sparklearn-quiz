@@ -6,6 +6,7 @@ import styles from '../styles/Home.module.scss'
 import { useState, useEffect } from 'react'
 import CurrentScore from '../components/CurrentScore'
 import FinalScore from '../components/FinalScore'
+import Leaderboard from '../components/Leaderboard'
 
 export default function Home ({ questions }) {
   const [finalQuestionSet, setFinalQuestionSet] = useState({})
@@ -16,8 +17,18 @@ export default function Home ({ questions }) {
   const [gameStart, setGameStart] = useState(false)
   const [gameFinished, setGameFinished] = useState(false)
 
+  const [leaderboard, setLeaderboard] = useState({})
+
+  const fetchLeaderboard = async () => {
+    const result = await fetch('/api/leaderboard')
+
+    const data = await result.json()
+    setLeaderboard(data)
+  }
+
   useEffect(() => {
     fetchQuestions()
+    fetchLeaderboard()
   }, [])
 
   useEffect(() => {
@@ -42,6 +53,7 @@ export default function Home ({ questions }) {
     setEmail('')
     setScore(0)
     setActiveQuestion(0)
+    fetchLeaderboard()
   }
 
   const handleGameStatus = () => {
@@ -86,6 +98,7 @@ export default function Home ({ questions }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
+        <Leaderboard topPlayers={leaderboard} />
         {!gameStart && !gameFinished ? (
           <Register
             nickname={nickname}
