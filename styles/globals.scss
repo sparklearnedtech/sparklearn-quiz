@@ -77,10 +77,21 @@ button {
   border-radius: 20px;
 }
 
+.points {
+  color: #bf2c2c;
+}
+
 .card {
   background-color: rgb(7, 95, 146);
   padding: 50px 30px;
   border-radius: 30px;
+}
+
+.q-card {
+  background-color: rgb(255 235 190);
+  padding: 50px 30px;
+  border-radius: 30px;
+  margin: 20px;
 }
 
 .btn-correct,
@@ -89,7 +100,7 @@ button {
 .btn-next {
   margin: 4px;
   padding: 12px 20px;
-  width: 8rem;
+  width: 15rem;
   border-radius: 30px;
 }
 
@@ -110,6 +121,19 @@ button {
 
 .btn-next {
   background-color: rgb(8, 103, 135);
+  transition: 0.3s all ease-in-out;
+}
+
+.btn-reset {
+  background-color: rgb(21 52 147);
+  transition: 0.3s all ease-in-out;
+  margin: 4px;
+  margin-top: 20px;
+  padding: 15px 30px;
+}
+
+.btn-reset:hover {
+  background-color: rgb(12, 34, 99);
   transition: 0.3s all ease-in-out;
 }
 
@@ -136,8 +160,12 @@ button {
 .final-score-area {
   text-align: center;
   border-radius: 30px;
-  padding: 20px 40px;
+  padding: 10px;
   background-color: rgb(133, 179, 224);
+
+  h1 {
+    font-size: 10vh;
+  }
 }
 
 .current-score-area {
