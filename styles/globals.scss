@@ -31,6 +31,10 @@ a {
   justify-content: center;
 }
 
+.j-content-end {
+  justify-content: end;
+}
+
 form {
   display: grid;
 
@@ -109,4 +113,24 @@ button {
 .btn-next:hover {
   background-color: rgb(2, 42, 55);
   transition: 0.3s all ease-in-out;
+}
+
+.final-score-area {
+  margin: 0 !important;
+  position: absolute;
+  top: 0;
+  right: 30px;
+  // text-align: right;
+}
+
+.head-nickname,
+.head-score {
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 60px 20px 20px 30px;
+}
+
+.head-score {
+  padding: 10px 20px;
+  margin: 0;
 }
