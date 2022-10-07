@@ -23,8 +23,26 @@ a {
   box-sizing: border-box;
 }
 
+.d-block {
+  display: block;
+}
+
 .d-flex {
   display: flex;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .j-content-center {
@@ -116,11 +134,17 @@ button {
 }
 
 .final-score-area {
+  text-align: center;
+  border-radius: 30px;
+  padding: 20px 40px;
+  background-color: rgb(133, 179, 224);
+}
+
+.current-score-area {
   margin: 0 !important;
   position: absolute;
   top: 0;
   right: 30px;
-  // text-align: right;
 }
 
 .head-nickname,
@@ -133,4 +157,8 @@ button {
 .head-score {
   padding: 10px 20px;
   margin: 0;
+}
+
+.score-title {
+  color: white;
 }
