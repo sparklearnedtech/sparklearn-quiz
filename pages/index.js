@@ -24,6 +24,7 @@ export default function Home ({ questions }) {
   const [timeLeft, setTimeLeft] = useState(10)
   const [timerOn, setTimerOn] = useState(true)
   const [timerKey, setTimerKey] = useState(0)
+  const [showAns, setShowAns] = useState(false)
 
   const fetchLeaderboard = async () => {
     const result = await fetch('/api/leaderboard')
@@ -37,6 +38,10 @@ export default function Home ({ questions }) {
     setScore(score + activeQuestion.score)
   }
 
+  function wrong () {
+    setShowAns(true)
+  }
+
   function UrgeWithPleasureComponent () {
     return (
       <CountdownCircleTimer
@@ -47,7 +52,8 @@ export default function Home ({ questions }) {
         colors={['#004777', '#F7B801', '#A30000', '#A30000']}
         colorsTime={[7, 5, 2, 0]}
         onComplete={() => {
-          setActiveQuestion(activeQuestion + 1)
+          wrong()
+          console.log('Wrong')
         }}
       >
         {({ remainingTime }) => remainingTime}
@@ -71,7 +77,8 @@ export default function Home ({ questions }) {
       fetchQuestions()
       setGameFinished(true)
     }
-    console.log(activeQuestion)
+    setShowAns(false)
+    setTimerKey(timerKey + 1)
   }, [activeQuestion])
 
   const resetHandler = () => {
@@ -159,6 +166,7 @@ export default function Home ({ questions }) {
               correct={correct}
               correctAnswer={correctAnswer}
               setCorrectAnswer={setCorrectAnswer}
+              showAns={showAns}
             />
           </>
         ) : (

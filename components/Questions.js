@@ -8,10 +8,10 @@ export default function Questions ({
   setScore,
   score,
   timer,
-  correct
+  correct,
+  showAns
 }) {
   const [answer, setAnswer] = useState(currentQuestion?.answer)
-  const [showAns, setShowAns] = useState(false)
 
   useEffect(() => {
     setAnswer(currentQuestion?.answer)
@@ -25,12 +25,13 @@ export default function Questions ({
           {currentQuestion?.score > 1 ? 'Points' : 'Point'}
         </h3>
         <h2 className='d-block'>{currentQuestion?.question}</h2>
-        {showAns ? answer : ''}
+        {showAns ? currentQuestion.answer : ''}
       </div>
 
       <div className='d-flex j-content-center'>
         <button
           className='d-block mx-auto btn-correct'
+          disabled={showAns}
           onClick={() => {
             correct()
           }}
