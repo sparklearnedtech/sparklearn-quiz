@@ -10,6 +10,7 @@ import Leaderboard from '../components/Leaderboard'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 export default function Home ({ questions }) {
+  const numQ = 10
   const [finalQuestionSet, setFinalQuestionSet] = useState({})
   const [activeQuestion, setActiveQuestion] = useState(0)
   const [email, setEmail] = useState('')
@@ -18,6 +19,7 @@ export default function Home ({ questions }) {
   const [gameStart, setGameStart] = useState(false)
   const [gameFinished, setGameFinished] = useState(false)
 
+  const [correctAnswer, setCorrectAnswer] = useState()
   const [leaderboard, setLeaderboard] = useState({})
   const [timeLeft, setTimeLeft] = useState(10)
   const [timerOn, setTimerOn] = useState(true)
@@ -33,7 +35,6 @@ export default function Home ({ questions }) {
   function correct () {
     setActiveQuestion(activeQuestion + 1)
     setScore(score + activeQuestion.score)
-    setTimerKey(timerKey + 1)
   }
 
   function UrgeWithPleasureComponent () {
@@ -60,8 +61,7 @@ export default function Home ({ questions }) {
   }, [])
 
   useEffect(() => {
-    // setTimerOn()
-    if (activeQuestion >= 9) {
+    if (activeQuestion >= numQ) {
       fetch('/api/save', {
         method: 'POST',
         body: JSON.stringify({ nickname, email, score })
@@ -83,6 +83,7 @@ export default function Home ({ questions }) {
     setScore(0)
     setActiveQuestion(0)
     fetchLeaderboard()
+    window.location.reload()
   }
 
   const handleGameStatus = () => {
@@ -98,7 +99,7 @@ export default function Home ({ questions }) {
 
     let k = 0
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < numQ; i++) {
       if (i + j > questions.length - 1) {
         questionSet[i] = questions[k++]
       } else {
@@ -127,6 +128,15 @@ export default function Home ({ questions }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
+        <div className='d-flex j-content-center'>
+          <h1
+            style={{ position: 'absolute', top: '20px', color: 'white' }}
+            className='text-center'
+          >
+            Test Your Blockchain Knowledge!
+          </h1>
+        </div>
+
         <Leaderboard topPlayers={leaderboard} />
         {!gameStart && !gameFinished ? (
           <Register
@@ -147,6 +157,8 @@ export default function Home ({ questions }) {
               score={score}
               timer={UrgeWithPleasureComponent}
               correct={correct}
+              correctAnswer={correctAnswer}
+              setCorrectAnswer={setCorrectAnswer}
             />
           </>
         ) : (
@@ -156,6 +168,17 @@ export default function Home ({ questions }) {
             resetHandler={resetHandler}
           />
         )}
+        <div className='d-flex j-content-center'>
+          <marquee
+            style={{ color: 'white', position: 'absolute', bottom: '40px' }}
+          >
+            <h1>
+              10,000 SRK TOKEN Grand Prize | 10,000 SRK TOKEN Grand Prize |
+              10,000 SRK TOKEN Grand Prize | 10,000 SRK TOKEN Grand Prize |
+              10,000 SRK TOKEN Grand Prize
+            </h1>
+          </marquee>
+        </div>
       </main>
     </div>
   )
@@ -166,92 +189,93 @@ export async function getServerSideProps (context) {
     {
       id: 0,
       question:
-        'Q1 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
-      score: 2
+        'The first open-source blockchain with smart contract functionality.',
+      score: 5,
+      answer: 'ETHEREUM'
     },
     {
       id: 1,
-      question:
-        'Q2  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
-      score: 1
+      question: 'The native token of Ethereum.',
+      score: 4,
+      answer: 'ETHER'
     },
     {
       id: 2,
-      question:
-        'Q3  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
-      score: 3
+      question: 'Native token of Ownly.',
+      score: 3,
+      answer: 'OWN'
     },
     {
       id: 3,
-      question:
-        'Q4  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
-      score: 1
+      question: 'Native token ni SparkPoint.',
+      score: 3,
+      answer: 'SRK TOKEN'
     },
     {
       id: 4,
-      question:
-        'Q5  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
-      score: 2
+      question: 'Native token of MetaGaming Guild.',
+      score: 3,
+      answer: 'MGG'
     },
     {
       id: 5,
-      question:
-        'Q6  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
-      score: 1
+      question: 'Definition of DApps.',
+      score: 2,
+      answer: 'DECENTRALIZED APPS'
     },
     {
       id: 6,
-      question:
-        'Q7  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
-      score: 2
+      question: 'New game to be launched by MGG.',
+      score: 3,
+      answer: 'METASAGA WARRIORS'
     },
     {
       id: 7,
-      question:
-        'Q8  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
-      score: 2
+      question: 'Meaning of POS.',
+      score: 4,
+      answer: 'PROOF OF STAKE'
     },
     {
       id: 8,
-      question:
-        'Q9  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
-      score: 3
+      question: 'Meaning of POW.',
+      score: 4,
+      answer: 'PROOF OF WORK'
     },
     {
       id: 9,
-      question:
-        'Q10  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
-      score: 3
+      question: 'Ilang years na ang SparkPoint.',
+      score: 2,
+      answer: '4 YEARS'
     },
     {
       id: 10,
-      question:
-        'Q11  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
-      score: 4
+      question: 'Meaning of NFT',
+      score: 3,
+      answer: 'NON-FUNGIBLE TOKEN'
     },
     {
       id: 11,
-      question:
-        'Q12  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
-      score: 1
+      question: 'Creator of Bitcoin',
+      score: 5,
+      answer: 'SATOSHI NAKAMOTO'
     },
     {
       id: 12,
-      question:
-        'Q13  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
-      score: 1
+      question: 'Most expensive crypto.',
+      score: 3,
+      answer: 'BITCOIN'
     },
     {
       id: 13,
-      question:
-        'Q14  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
-      score: 1
+      question: 'A decentralized digital ledger.',
+      score: 5,
+      answer: 'BLOCKCHAIN'
     },
     {
       id: 14,
-      question:
-        'Q15  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat alias',
-      score: 3
+      question: 'Physical device that stores crypto assets’ digital keys',
+      score: 5,
+      answer: 'HARDWARE WALLET'
     }
   ]
 
