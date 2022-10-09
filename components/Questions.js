@@ -35,7 +35,9 @@ export default function Questions ({
 
       <div className='d-flex j-content-center'>
         <button
-          className='d-block mx-auto btn-correct'
+          className={`d-block mx-auto ${
+            showAns ? 'btn-disabled' : 'btn-correct'
+          }`}
           disabled={showAns}
           onClick={() => {
             correct()

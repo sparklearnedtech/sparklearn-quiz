@@ -101,6 +101,7 @@ button {
 .btn-correct,
 .btn-wrong,
 .btn-previous,
+.btn-disabled,
 .btn-next {
   margin: 4px;
   padding: 12px 20px;
@@ -134,6 +135,11 @@ button {
   margin: 4px;
   margin-top: 20px;
   padding: 15px 30px;
+}
+
+.btn-disabled {
+  background-color: rgb(73, 73, 73);
+  transition: 0.3s all ease-in-out;
 }
 
 .btn-reset:hover {

@@ -64,7 +64,7 @@ export default function Home ({ questions }) {
 
   const renderTime = ({ remainingTime }) => {
     if (remainingTime === 0) {
-      return <div className='timer'>Too lale...</div>
+      return <div className='timer'>Too late...</div>
     }
 
     return (
