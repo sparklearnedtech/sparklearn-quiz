@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import CurrentScore from '../components/CurrentScore'
 import FinalScore from '../components/FinalScore'
 import Leaderboard from '../components/Leaderboard'
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 export default function Home ({ questions }) {
   const [finalQuestionSet, setFinalQuestionSet] = useState({})
@@ -18,6 +19,9 @@ export default function Home ({ questions }) {
   const [gameFinished, setGameFinished] = useState(false)
 
   const [leaderboard, setLeaderboard] = useState({})
+  const [timeLeft, setTimeLeft] = useState(10)
+  const [timerOn, setTimerOn] = useState(true)
+  const [timerKey, setTimerKey] = useState(0)
 
   const fetchLeaderboard = async () => {
     const result = await fetch('/api/leaderboard')
@@ -26,12 +30,37 @@ export default function Home ({ questions }) {
     setLeaderboard(data)
   }
 
+  function correct () {
+    setActiveQuestion(activeQuestion + 1)
+    setScore(score + activeQuestion.score)
+    setTimerKey(timerKey + 1)
+  }
+
+  function UrgeWithPleasureComponent () {
+    return (
+      <CountdownCircleTimer
+        key={timerKey}
+        isPlaying={timerOn}
+        duration={timeLeft}
+        initialRemainingTime={10}
+        colors={['#004777', '#F7B801', '#A30000', '#A30000']}
+        colorsTime={[7, 5, 2, 0]}
+        onComplete={() => {
+          setActiveQuestion(activeQuestion + 1)
+        }}
+      >
+        {({ remainingTime }) => remainingTime}
+      </CountdownCircleTimer>
+    )
+  }
+
   useEffect(() => {
     fetchQuestions()
     fetchLeaderboard()
   }, [])
 
   useEffect(() => {
+    // setTimerOn()
     if (activeQuestion >= 9) {
       fetch('/api/save', {
         method: 'POST',
@@ -116,6 +145,8 @@ export default function Home ({ questions }) {
               setActiveQuestion={setActiveQuestion}
               setScore={setScore}
               score={score}
+              timer={UrgeWithPleasureComponent}
+              correct={correct}
             />
           </>
         ) : (
