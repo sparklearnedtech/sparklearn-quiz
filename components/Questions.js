@@ -18,14 +18,19 @@ export default function Questions ({
   }, [currentQuestion])
   return (
     <div className='text-center'>
-      <div className='q-card'>
+      <div className='q-card d-flex'>
         {timer()}
-        <h3 className='points'>
-          {currentQuestion?.score}{' '}
-          {currentQuestion?.score > 1 ? 'Points' : 'Point'}
-        </h3>
-        <h2 className='d-block'>{currentQuestion?.question}</h2>
-        {showAns ? currentQuestion.answer : ''}
+        <div
+          style={{ marginLeft: '100px', width: '100%' }}
+          className={'j-content-center'}
+        >
+          <h3 className='points'>
+            {currentQuestion?.score}{' '}
+            {currentQuestion?.score > 1 ? 'Points' : 'Point'}
+          </h3>
+          <h2 className='d-block'>{currentQuestion?.question}</h2>
+          {showAns ? currentQuestion.answer : ''}
+        </div>
       </div>
 
       <div className='d-flex j-content-center'>
