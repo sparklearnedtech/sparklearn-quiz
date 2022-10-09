@@ -17,7 +17,6 @@ export default function Home ({ questions }) {
   const [score, setScore] = useState(0)
   const [gameStart, setGameStart] = useState(false)
   const [gameFinished, setGameFinished] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(10)
 
   const [correctAnswer, setCorrectAnswer] = useState()
   const [leaderboard, setLeaderboard] = useState({})
@@ -46,7 +45,6 @@ export default function Home ({ questions }) {
       setGameFinished(true)
     }
     console.log(activeQuestion)
-    setTimeLeft(10)
   }, [activeQuestion])
 
   const resetHandler = () => {
@@ -141,17 +139,6 @@ export default function Home ({ questions }) {
             resetHandler={resetHandler}
           />
         )}
-        {/* <div className='d-flex j-content-center'>
-          <marquee
-            style={{ color: 'white', position: 'absolute', bottom: '40px' }}
-          >
-            <h1>
-              10,000 SRK TOKEN Grand Prize | 10,000 SRK TOKEN Grand Prize |
-              10,000 SRK TOKEN Grand Prize | 10,000 SRK TOKEN Grand Prize |
-              10,000 SRK TOKEN Grand Prize
-            </h1>
-          </marquee>
-        </div> */}
         <div className='d-flex j-content-center'>
           <marquee
             style={{ color: 'white', position: 'absolute', bottom: '40px' }}
