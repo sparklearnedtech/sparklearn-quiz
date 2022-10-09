@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import CurrentScore from '../components/CurrentScore'
 import FinalScore from '../components/FinalScore'
 import Leaderboard from '../components/Leaderboard'
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 export default function Home ({ questions }) {
   const numQ = 10
@@ -20,12 +21,59 @@ export default function Home ({ questions }) {
 
   const [correctAnswer, setCorrectAnswer] = useState()
   const [leaderboard, setLeaderboard] = useState({})
+  const [timeLeft, setTimeLeft] = useState(10)
+  const [timerOn, setTimerOn] = useState(true)
+  const [timerKey, setTimerKey] = useState(0)
+  const [showAns, setShowAns] = useState(false)
 
   const fetchLeaderboard = async () => {
     const result = await fetch('/api/leaderboard')
 
     const data = await result.json()
     setLeaderboard(data)
+  }
+
+  function correct () {
+    setActiveQuestion(activeQuestion + 1)
+    setScore(score + finalQuestionSet[activeQuestion].score)
+    console.log(finalQuestionSet[activeQuestion].score)
+  }
+
+  function wrong () {
+    setShowAns(true)
+  }
+
+  function UrgeWithPleasureComponent () {
+    return (
+      <CountdownCircleTimer
+        key={timerKey}
+        isPlaying={timerOn}
+        duration={timeLeft}
+        initialRemainingTime={10}
+        colors={['#004777', '#F7B801', '#A30000', '#A30000']}
+        colorsTime={[7, 5, 2, 0]}
+        onComplete={() => {
+          wrong()
+          console.log('Wrong')
+        }}
+      >
+        {renderTime}
+      </CountdownCircleTimer>
+    )
+  }
+
+  const renderTime = ({ remainingTime }) => {
+    if (remainingTime === 0) {
+      return <div className='timer'>Too late...</div>
+    }
+
+    return (
+      <div className='timer'>
+        <div className='text'>Remaining</div>
+        <div className='value'>{remainingTime}</div>
+        <div className='text'>seconds</div>
+      </div>
+    )
   }
 
   useEffect(() => {
@@ -44,7 +92,8 @@ export default function Home ({ questions }) {
       fetchQuestions()
       setGameFinished(true)
     }
-    console.log(activeQuestion)
+    setShowAns(false)
+    setTimerKey(timerKey + 1)
   }, [activeQuestion])
 
   const resetHandler = () => {
@@ -128,8 +177,11 @@ export default function Home ({ questions }) {
               setActiveQuestion={setActiveQuestion}
               setScore={setScore}
               score={score}
+              timer={UrgeWithPleasureComponent}
+              correct={correct}
               correctAnswer={correctAnswer}
               setCorrectAnswer={setCorrectAnswer}
+              showAns={showAns}
             />
           </>
         ) : (
