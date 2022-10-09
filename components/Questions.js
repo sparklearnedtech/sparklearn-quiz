@@ -1,21 +1,29 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 export default function Questions ({
   currentQuestion,
+  setCorrectAnswer,
   activeQuestion,
   setActiveQuestion,
   setScore,
-  score
+  score,
+  time
 }) {
-  console.log(currentQuestion)
+  const [answer, setAnswer] = useState(currentQuestion?.answer)
+  const [showAns, setShowAns] = useState(false)
+
+  useEffect(() => {
+    setAnswer(currentQuestion?.answer)
+  }, [currentQuestion])
   return (
     <div className='text-center'>
       <div className='q-card'>
-        <h2 className='d-block'>{currentQuestion.question}</h2>
         <h3 className='points'>
-          {currentQuestion.score}{' '}
-          {currentQuestion.score > 1 ? 'Points' : 'Point'}
+          {currentQuestion?.score}{' '}
+          {currentQuestion?.score > 1 ? 'Points' : 'Point'}
         </h3>
+        <h2 className='d-block'>{currentQuestion?.question}</h2>
+        {showAns ? answer : ''}
       </div>
 
       <div className='d-flex j-content-center'>
@@ -34,7 +42,7 @@ export default function Questions ({
             setActiveQuestion(activeQuestion + 1)
           }}
         >
-          Wrong
+          Next
         </button>
       </div>
     </div>
