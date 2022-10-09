@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import CurrentScore from '../components/CurrentScore'
 import FinalScore from '../components/FinalScore'
 import Leaderboard from '../components/Leaderboard'
+import Marquee from 'react-fast-marquee'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 export default function Home ({ questions }) {
@@ -192,15 +193,15 @@ export default function Home ({ questions }) {
           />
         )}
         <div className='d-flex j-content-center'>
-          <marquee
-            style={{ color: 'white', position: 'absolute', bottom: '40px' }}
+          <Marquee
+            style={{ color: 'white', position: 'absolute', bottom: '40px', backgroundColor: '#fff213', color: 'red' }}
           >
             <h1>
-              10,000 SRK TOKEN Grand Prize | 10,000 SRK TOKEN Grand Prize |
-              10,000 SRK TOKEN Grand Prize | 10,000 SRK TOKEN Grand Prize |
-              10,000 SRK TOKEN Grand Prize
+              10,000 SRK TOKEN, 200 PESOS WORTH GRAND PRIZE | 10,000 SRK TOKEN, 200 PESOS WORTH GRAND PRIZE |
+              10,000 SRK TOKEN, 200 PESOS WORTH GRAND PRIZE | 10,000 SRK TOKEN, 200 PESOS WORTH GRAND PRIZE |
+              10,000 SRK TOKEN, 200 PESOS WORTH GRAND PRIZE
             </h1>
-          </marquee>
+          </Marquee>
         </div>
       </main>
     </div>
