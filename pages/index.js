@@ -145,9 +145,9 @@ export default function Home ({ questions }) {
             style={{ color: 'white', position: 'absolute', bottom: '40px', backgroundColor: '#fff213', color: 'red' }}
           >
             <h1>
-              10,000 SRK TOKEN Grand Prize | 10,000 SRK TOKEN Grand Prize |
-              10,000 SRK TOKEN Grand Prize | 10,000 SRK TOKEN Grand Prize |
-              10,000 SRK TOKEN Grand Prize
+              10,000 SRK TOKEN, 200 PESOS WORTH GRAND PRIZE | 10,000 SRK TOKEN, 200 PESOS WORTH GRAND PRIZE |
+              10,000 SRK TOKEN, 200 PESOS WORTH GRAND PRIZE | 10,000 SRK TOKEN, 200 PESOS WORTH GRAND PRIZE |
+              10,000 SRK TOKEN, 200 PESOS WORTH GRAND PRIZE
             </h1>
           </Marquee>
         </div>
