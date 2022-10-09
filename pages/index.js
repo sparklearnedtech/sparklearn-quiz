@@ -35,7 +35,8 @@ export default function Home ({ questions }) {
 
   function correct () {
     setActiveQuestion(activeQuestion + 1)
-    setScore(score + activeQuestion.score)
+    setScore(score + finalQuestionSet[activeQuestion].score)
+    console.log(finalQuestionSet[activeQuestion].score)
   }
 
   function wrong () {
