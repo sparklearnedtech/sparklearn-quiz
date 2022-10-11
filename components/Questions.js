@@ -29,7 +29,7 @@ export default function Questions ({
             {currentQuestion?.score > 1 ? 'Points' : 'Point'}
           </h3>
           <h2 className='d-block'>{currentQuestion?.question}</h2>
-          {showAns ? currentQuestion.answer : ''}
+          {showAns ? currentQuestion?.answer : ''}
         </div>
       </div>
 
