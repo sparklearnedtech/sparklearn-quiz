@@ -194,12 +194,17 @@ export default function Home ({ questions }) {
         )}
         <div className='d-flex j-content-center'>
           <Marquee
-            style={{ color: 'white', position: 'absolute', bottom: '40px', backgroundColor: '#fff213', color: 'red' }}
+            style={{
+              color: 'white',
+              position: 'absolute',
+              bottom: '40px',
+              backgroundColor: '#fff213',
+              color: 'red'
+            }}
           >
             <h1>
-              10,000 SRK TOKEN, 200 PESOS WORTH GRAND PRIZE | 10,000 SRK TOKEN, 200 PESOS WORTH GRAND PRIZE |
-              10,000 SRK TOKEN, 200 PESOS WORTH GRAND PRIZE | 10,000 SRK TOKEN, 200 PESOS WORTH GRAND PRIZE |
-              10,000 SRK TOKEN, 200 PESOS WORTH GRAND PRIZE
+              10,000 SRK TOKEN GRAND PRIZE | 10,000 SRK TOKEN GRAND PRIZE |
+              10,000 SRK TOKEN GRAND PRIZE | 10,000 SRK TOKEN
             </h1>
           </Marquee>
         </div>
@@ -300,6 +305,19 @@ export async function getServerSideProps (context) {
       question: 'Physical device that stores crypto assets’ digital keys',
       score: 5,
       answer: 'HARDWARE WALLET'
+    },
+    {
+      id: 15,
+      question: 'Smallest usnit of ethereum',
+      score: 5,
+      answer: 'GWEI'
+    },
+    {
+      id: 16,
+      question:
+        'A set of characters or figures that represents a wallet which is used to send and receive cryptocurrencies.',
+      score: 5,
+      answer: 'WALLET ADDRESS'
     }
   ]
 
