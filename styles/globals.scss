@@ -98,6 +98,7 @@ button {
   margin: 20px;
 }
 
+.btn-choices,
 .btn-correct,
 .btn-wrong,
 .btn-previous,
@@ -107,6 +108,12 @@ button {
   padding: 12px 20px;
   width: 15rem;
   border-radius: 30px;
+}
+
+.btn-choices {
+  font-size: 100%;
+  font-weight: 600;
+  background-color: rgb(8, 103, 135);
 }
 
 .btn-correct {
@@ -162,7 +169,8 @@ button {
   transition: 0.3s all ease-in-out;
 }
 
-.btn-next:hover {
+.btn-next:hover,
+.btn-choices:hover {
   background-color: rgb(2, 42, 55);
   transition: 0.3s all ease-in-out;
 }
