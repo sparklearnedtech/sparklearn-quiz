@@ -220,104 +220,237 @@ export async function getServerSideProps (context) {
       question:
         'The first open-source blockchain with smart contract functionality.',
       score: 5,
-      answer: 'ETHEREUM'
+      answer: 'ETHEREUM',
+      choices: ['Bitcoin', 'Polygon', 'DApp', 'Ethereum']
     },
     {
       id: 1,
       question: 'The native token of Ethereum.',
       score: 4,
-      answer: 'ETHER'
+      answer: 'ETHER',
+      choices: ['ETH/Ether', 'EHR', 'ET', 'THER']
     },
     {
       id: 2,
       question: 'Native token of Ownly.',
       score: 3,
-      answer: 'OWN'
+      answer: 'OWN',
+      choices: ['NLY', 'OWN', 'OWY', 'OWLY']
     },
     {
       id: 3,
       question: 'Native token ni SparkPoint.',
       score: 3,
-      answer: 'SRK TOKEN'
+      answer: 'SRK TOKEN',
+      choices: ['SRK', 'SPT', 'SPPT', 'SKT']
     },
     {
       id: 4,
       question: 'Native token of MetaGaming Guild.',
       score: 3,
-      answer: 'MGG'
+      answer: 'MGG',
+      choices: ['MTG', 'MEG', 'MGG', 'MGD']
     },
     {
       id: 5,
       question: 'Definition of DApps.',
       score: 2,
-      answer: 'DECENTRALIZED APPS'
+      answer: 'DECENTRALIZED APPS',
+      choices: [
+        'Developed Apps',
+        'Digital Apps',
+        'Decentralized Apps',
+        'Dedicated Apps'
+      ]
     },
     {
       id: 6,
       question: 'New game to be launched by MGG.',
       score: 3,
-      answer: 'METASAGA WARRIORS'
+      answer: 'METASAGA WARRIORS',
+      choices: [
+        'Meta Game',
+        'Saga Adventures',
+        'Meta Warriors',
+        'Meta Saga Warriors'
+      ]
     },
     {
       id: 7,
       question: 'Meaning of POS.',
       score: 4,
-      answer: 'PROOF OF STAKE'
+      answer: 'PROOF OF STAKE',
+      choices: [
+        'Point of Sale',
+        'Proof of Stake',
+        'Percent of Statistics',
+        'Person on Set'
+      ]
     },
     {
       id: 8,
       question: 'Meaning of POW.',
       score: 4,
-      answer: 'PROOF OF WORK'
+      answer: 'PROOF OF WORK',
+      choices: [
+        'Proof of Work',
+        'Person on Work',
+        'Percentage of Work',
+        'Piece of Wood'
+      ]
     },
     {
       id: 9,
-      question: 'Ilang years na ang SparkPoint.',
-      score: 2,
-      answer: '4 YEARS'
+      question: 'Meaning of NFT',
+      score: 3,
+      answer: 'NON-FUNGIBLE TOKEN',
+      choices: [
+        'Non Forgettable Token',
+        'Non Feasible Target',
+        'Non Fungible Token',
+        'No Food Today'
+      ]
     },
     {
       id: 10,
-      question: 'Meaning of NFT',
-      score: 3,
-      answer: 'NON-FUNGIBLE TOKEN'
+      question: 'Creator of Bitcoin',
+      score: 5,
+      answer: 'SATOSHI NAKAMOTO',
+      choices: ['Elon Musk', 'Satoshi Nakamoto', 'Michael Jordan', 'Yao Ming']
     },
     {
       id: 11,
-      question: 'Creator of Bitcoin',
-      score: 5,
-      answer: 'SATOSHI NAKAMOTO'
+      question: 'Most expensive crypto.',
+      score: 3,
+      answer: 'BITCOIN',
+      choices: ['Ether/ETH', 'Matic', 'Bitcoin/BTC', 'SRK']
     },
     {
       id: 12,
-      question: 'Most expensive crypto.',
-      score: 3,
-      answer: 'BITCOIN'
+      question: 'A decentralized digital ledger.',
+      score: 5,
+      answer: 'BLOCKCHAIN',
+      choices: ['Hardware Wallet', 'Ethereum', 'Bitcoin', 'Blockchain']
     },
     {
       id: 13,
-      question: 'A decentralized digital ledger.',
+      question: 'Physical device that stores crypto assets’ digital keys',
       score: 5,
-      answer: 'BLOCKCHAIN'
+      answer: 'HARDWARE WALLET',
+      choices: [
+        'Hardware Wallet',
+        'Metamask Wallet',
+        'Digital Wallet',
+        'E-wallet'
+      ]
     },
     {
       id: 14,
-      question: 'Physical device that stores crypto assets’ digital keys',
+      question: 'Data structure that is used for verifying a block',
       score: 5,
-      answer: 'HARDWARE WALLET'
+      answer: 'Merkel Tree',
+      choices: [
+        'File Tree',
+        'Merkel Tree',
+        'Block Verifier',
+        'Secure Block Checker'
+      ]
     },
     {
       id: 15,
-      question: 'Smallest usnit of ethereum',
+      question: 'Which is not a type of blockchain',
       score: 5,
-      answer: 'GWEI'
+      answer: 'Pi Chain',
+      choices: [
+        'Public Blockchain',
+        'Pi Chain',
+        'Consortium or Federated Blockchain',
+        'Hybrid Blockchain'
+      ]
     },
     {
       id: 16,
       question:
-        'A set of characters or figures that represents a wallet which is used to send and receive cryptocurrencies.',
+        'Blocks in a blockchain are chained together by _____________. HASH VALUE',
       score: 5,
-      answer: 'WALLET ADDRESS'
+      answer: 'Hash Value',
+      choices: [
+        'Value of Transfer',
+        'Hash Value',
+        'Wallet address',
+        'Block explorer'
+      ]
+    },
+    {
+      id: 17,
+      question:
+        'Used to build smart contracts and dApps on the Ethereum blockchain.',
+      score: 5,
+      answer: 'Solidity',
+      choices: ['C++', 'C#', 'Solidity', 'Python']
+    },
+    {
+      id: 18,
+      question:
+        'Total percent of nodes that hackers should control if they want to disrupt a blockchain network. 51%.',
+      score: 5,
+      answer: '51%',
+      choices: ['10%', '20%', '35%', '51%']
+    },
+    {
+      id: 19,
+      question: 'Meaning of DAO.',
+      score: 5,
+      answer: 'Distributed Autonomous Organization',
+      choices: [
+        'Decentralized Application Offering',
+        'Digital Award Offered',
+        'Distributed Autonomous Organization',
+        'Distributed Automatic Organization'
+      ]
+    },
+    {
+      id: 20,
+      question: 'Meaning of DEX.',
+      score: 5,
+      answer: 'Decentralized Exchange',
+      choices: [
+        'Decentralized Exchange',
+        'Decentralized Extender',
+        'Digital Exchange',
+        'Developed Exchange'
+      ]
+    },
+    {
+      id: 21,
+      question:
+        'Process of depositing a cryptocurrency token or coin in a yield farming project or protocol.',
+      score: 5,
+      answer: 'Staking',
+      choices: ['Holding', 'Buying', 'Staking', 'Burning']
+    },
+    {
+      id: 22,
+      question:
+        'Type of cryptocurrency that always holds a stable price and is backed by fiat money.',
+      score: 5,
+      answer: 'Stable Coin',
+      choices: ['Bitcoin', 'Alt Coin', 'Stable Coin', 'Ethereum']
+    },
+    {
+      id: 23,
+      question:
+        'Version of the World Wide Web powered by blockchain technology.',
+      score: 5,
+      answer: 'Web3',
+      choices: ['Web1', 'Web2', 'Web3', 'Blockchain']
+    },
+    {
+      id: 24,
+      question: 'A virtual world that exists online.',
+      score: 5,
+      answer: 'Metaverse',
+      choices: ['Social Media', 'Metaverse', 'Blockchain', 'Ethereum Network']
     }
   ]
 
