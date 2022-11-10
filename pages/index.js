@@ -401,7 +401,7 @@ export async function getServerSideProps (context) {
     {
       id: 17,
       question:
-        'Used to build smart contracts and dApps on the Ethereum blockchain.',
+        'Used to build smart contracts and DApps on the Ethereum blockchain.',
       score: 5,
       answer: 'Solidity',
       choices: ['C++', 'C#', 'Solidity', 'Python']
