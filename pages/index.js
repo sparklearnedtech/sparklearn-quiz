@@ -219,14 +219,14 @@ export async function getServerSideProps (context) {
       question:
         'The first open-source blockchain with smart contract functionality.',
       score: 5,
-      answer: 'ETHEREUM',
+      answer: 'Ethereum',
       choices: ['Bitcoin', 'Polygon', 'DApp', 'Ethereum']
     },
     {
       id: 1,
       question: 'The native token of Ethereum.',
       score: 4,
-      answer: 'ETHER',
+      answer: 'ETH/Ether',
       choices: ['ETH/Ether', 'EHR', 'ET', 'THER']
     },
     {
@@ -240,7 +240,7 @@ export async function getServerSideProps (context) {
       id: 3,
       question: 'Native token ni SparkPoint.',
       score: 3,
-      answer: 'SRK TOKEN',
+      answer: 'SRK',
       choices: ['SRK', 'SPT', 'SPPT', 'SKT']
     },
     {
@@ -254,7 +254,7 @@ export async function getServerSideProps (context) {
       id: 5,
       question: 'Definition of DApps.',
       score: 2,
-      answer: 'DECENTRALIZED APPS',
+      answer: 'Decentralized Apps',
       choices: [
         'Developed Apps',
         'Digital Apps',
@@ -266,7 +266,7 @@ export async function getServerSideProps (context) {
       id: 6,
       question: 'New game to be launched by MGG.',
       score: 3,
-      answer: 'METASAGA WARRIORS',
+      answer: 'Meta Saga Warriors',
       choices: [
         'Meta Game',
         'Saga Adventures',
@@ -278,7 +278,7 @@ export async function getServerSideProps (context) {
       id: 7,
       question: 'Meaning of POS.',
       score: 4,
-      answer: 'PROOF OF STAKE',
+      answer: 'Proof of Stake',
       choices: [
         'Point of Sale',
         'Proof of Stake',
@@ -290,7 +290,7 @@ export async function getServerSideProps (context) {
       id: 8,
       question: 'Meaning of POW.',
       score: 4,
-      answer: 'PROOF OF WORK',
+      answer: 'Proof of Work',
       choices: [
         'Proof of Work',
         'Person on Work',
@@ -302,7 +302,7 @@ export async function getServerSideProps (context) {
       id: 9,
       question: 'Meaning of NFT',
       score: 3,
-      answer: 'NON-FUNGIBLE TOKEN',
+      answer: 'Non Fungible Token',
       choices: [
         'Non Forgettable Token',
         'Non Feasible Target',
@@ -314,28 +314,28 @@ export async function getServerSideProps (context) {
       id: 10,
       question: 'Creator of Bitcoin',
       score: 5,
-      answer: 'SATOSHI NAKAMOTO',
+      answer: 'Satoshi Nakamoto',
       choices: ['Elon Musk', 'Satoshi Nakamoto', 'Michael Jordan', 'Yao Ming']
     },
     {
       id: 11,
       question: 'Most expensive crypto.',
       score: 3,
-      answer: 'BITCOIN',
+      answer: 'Bitcoin/BTC',
       choices: ['Ether/ETH', 'Matic', 'Bitcoin/BTC', 'SRK']
     },
     {
       id: 12,
       question: 'A decentralized digital ledger.',
       score: 5,
-      answer: 'BLOCKCHAIN',
+      answer: 'Blockchain',
       choices: ['Hardware Wallet', 'Ethereum', 'Bitcoin', 'Blockchain']
     },
     {
       id: 13,
       question: 'Physical device that stores crypto assets’ digital keys',
       score: 5,
-      answer: 'HARDWARE WALLET',
+      answer: 'Hardware Wallet',
       choices: [
         'Hardware Wallet',
         'Metamask Wallet',
@@ -369,8 +369,7 @@ export async function getServerSideProps (context) {
     },
     {
       id: 16,
-      question:
-        'Blocks in a blockchain are chained together by _____________. HASH VALUE',
+      question: 'Blocks in a blockchain are chained together by _____________.',
       score: 5,
       answer: 'Hash Value',
       choices: [
@@ -391,7 +390,7 @@ export async function getServerSideProps (context) {
     {
       id: 18,
       question:
-        'Total percent of nodes that hackers should control if they want to disrupt a blockchain network. 51%.',
+        'Total percent of nodes that hackers should control if they want to disrupt a blockchain network.',
       score: 5,
       answer: '51%',
       choices: ['10%', '20%', '35%', '51%']
