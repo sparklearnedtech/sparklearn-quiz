@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 
+import { v4 as uuidV4 } from 'uuid'
+
 export default function Questions ({
   currentQuestion,
   setCorrectAnswer,
@@ -9,15 +11,61 @@ export default function Questions ({
   score,
   timer,
   correct,
-  showAns
+  showAns,
+  randomizer,
+  setStatus,
+  status,
+  setTimerOn,
+  numQuestions,
+  btnStatus,
+  setBtnStatus
 }) {
+  const numChoices = 4
   const [answer, setAnswer] = useState(currentQuestion?.answer)
+  const [choiceSet, setChoiceSet] = useState()
 
   useEffect(() => {
     setAnswer(currentQuestion?.answer)
+    if (activeQuestion < numQuestions) {
+      randomizer(numChoices, currentQuestion.choices, setChoiceSet)
+    }
   }, [currentQuestion])
+  const answerChecker = e => {
+    if (e.target.textContent === answer) {
+      console.log('correct')
+      setStatus(true)
+      correct()
+    } else {
+      setTimerOn(false)
+      setStatus(false)
+      setBtnStatus('btn-disabled')
+      setTimeout(() => {
+        setActiveQuestion(activeQuestion + 1)
+      }, 2000)
+    }
+  }
   return (
     <div className='text-center'>
+      <span
+        className={
+          typeof status === 'undefined'
+            ? btnStatus === 'btn-disabled'
+              ? 'status wrong'
+              : ''
+            : status
+            ? 'status correct'
+            : 'status wrong'
+        }
+      >
+        {typeof status === 'undefined'
+          ? btnStatus === 'btn-disabled'
+            ? 'No Answer!'
+            : ''
+          : status
+          ? 'Correct answer!'
+          : 'Wrong answer!'}
+      </span>
+
       <div className='q-card d-flex'>
         {timer()}
         <div
@@ -34,25 +82,15 @@ export default function Questions ({
       </div>
 
       <div className='d-flex j-content-center'>
-        <button
-          className={`d-block mx-auto ${
-            showAns ? 'btn-disabled' : 'btn-correct'
-          }`}
-          disabled={showAns}
-          onClick={() => {
-            correct()
-          }}
-        >
-          Correct
-        </button>
-        <button
-          className='d-block mx-auto btn-wrong'
-          onClick={() => {
-            setActiveQuestion(activeQuestion + 1)
-          }}
-        >
-          Next
-        </button>
+        {choiceSet?.map(choice => (
+          <button
+            className={`btn-choices ${btnStatus}`}
+            key={uuidV4()}
+            onClick={e => answerChecker(e)}
+          >
+            {choice}
+          </button>
+        ))}
       </div>
     </div>
   )

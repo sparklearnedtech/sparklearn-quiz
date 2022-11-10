@@ -8,7 +8,7 @@ export default function FinalScore ({ finalScore, nickname, resetHandler }) {
         <h1>{finalScore}</h1>
       </div>
       <button className='btn-reset' onClick={resetHandler}>
-        Reset
+        New Game
       </button>
     </div>
   )

@@ -26,6 +26,8 @@ export default function Home ({ questions }) {
   const [timerOn, setTimerOn] = useState(true)
   const [timerKey, setTimerKey] = useState(0)
   const [showAns, setShowAns] = useState(false)
+  const [status, setStatus] = useState()
+  const [btnStatus, setBtnStatus] = useState('')
 
   const fetchLeaderboard = async () => {
     const result = await fetch('/api/leaderboard')
@@ -35,9 +37,13 @@ export default function Home ({ questions }) {
   }
 
   function correct () {
-    setActiveQuestion(activeQuestion + 1)
-    setScore(score + finalQuestionSet[activeQuestion].score)
-    console.log(finalQuestionSet[activeQuestion].score)
+    setTimerOn(false)
+    setBtnStatus('btn-disabled')
+    setTimeout(() => {
+      setActiveQuestion(activeQuestion + 1)
+      setScore(score + finalQuestionSet[activeQuestion].score)
+      console.log(finalQuestionSet[activeQuestion].score)
+    }, 2000)
   }
 
   function wrong () {
@@ -56,6 +62,10 @@ export default function Home ({ questions }) {
         onComplete={() => {
           wrong()
           console.log('Wrong')
+          setBtnStatus('btn-disabled')
+          setTimeout(() => {
+            setActiveQuestion(activeQuestion + 1)
+          }, 2000)
         }}
       >
         {renderTime}
@@ -78,8 +88,9 @@ export default function Home ({ questions }) {
   }
 
   useEffect(() => {
-    fetchQuestions()
+    randomizer(numQ, questions, setFinalQuestionSet)
     fetchLeaderboard()
+    setBtnStatus('')
   }, [])
 
   useEffect(() => {
@@ -90,15 +101,17 @@ export default function Home ({ questions }) {
       })
       console.log('Finished')
 
-      fetchQuestions()
+      randomizer(numQ, questions, setFinalQuestionSet)
       setGameFinished(true)
     }
     setShowAns(false)
     setTimerKey(timerKey + 1)
+    setTimerOn(true)
+    setStatus()
+    setBtnStatus('')
   }, [activeQuestion])
 
   const resetHandler = () => {
-    console.log('test')
     setGameStart(false)
     setGameFinished(false)
     setNickname('')
@@ -113,36 +126,34 @@ export default function Home ({ questions }) {
     setGameStart(true)
   }
 
-  const fetchQuestions = () => {
-    let questionSet = []
+  const randomizer = (numItems, items, setter) => {
+    let itemSet = []
 
-    const baseIndex = Math.floor(Math.random() * questions.length)
+    const baseIndex = Math.floor(Math.random() * items?.length)
 
     let j = baseIndex
 
     let k = 0
 
-    for (let i = 0; i < numQ; i++) {
-      if (i + j > questions.length - 1) {
-        questionSet[i] = questions[k++]
+    for (let i = 0; i < numItems; i++) {
+      if (i + j > items?.length - 1) {
+        itemSet[i] = items[k++]
       } else {
-        questionSet[i] = questions[i + j]
+        itemSet[i] = items[i + j]
       }
     }
 
     for (let k = 0; k < 1000; k++) {
-      let randNum = Math.floor(Math.random() * questionSet.length)
+      let randNum = Math.floor(Math.random() * itemSet.length)
 
-      let temp = questionSet[0]
+      let temp = itemSet[0]
 
-      questionSet[0] = questionSet[randNum]
-      questionSet[randNum] = temp
+      itemSet[0] = itemSet[randNum]
+      itemSet[randNum] = temp
     }
-
-    setFinalQuestionSet(questionSet)
+    setter(itemSet)
   }
 
-  // console.log(finalQuestionSet[0]);
   return (
     <div className={styles.container}>
       <Head>
@@ -173,6 +184,7 @@ export default function Home ({ questions }) {
           <>
             <CurrentScore nickname={nickname} score={score} />
             <Questions
+              numQuestions={numQ}
               currentQuestion={finalQuestionSet[activeQuestion]}
               activeQuestion={activeQuestion}
               setActiveQuestion={setActiveQuestion}
@@ -183,6 +195,12 @@ export default function Home ({ questions }) {
               correctAnswer={correctAnswer}
               setCorrectAnswer={setCorrectAnswer}
               showAns={showAns}
+              setStatus={setStatus}
+              status={status}
+              randomizer={randomizer}
+              setTimerOn={setTimerOn}
+              btnStatus={btnStatus}
+              setBtnStatus={setBtnStatus}
             />
           </>
         ) : (
@@ -220,14 +238,14 @@ export async function getServerSideProps (context) {
       question:
         'The first open-source blockchain with smart contract functionality.',
       score: 5,
-      answer: 'ETHEREUM',
+      answer: 'Ethereum',
       choices: ['Bitcoin', 'Polygon', 'DApp', 'Ethereum']
     },
     {
       id: 1,
       question: 'The native token of Ethereum.',
       score: 4,
-      answer: 'ETHER',
+      answer: 'ETH/Ether',
       choices: ['ETH/Ether', 'EHR', 'ET', 'THER']
     },
     {
@@ -241,7 +259,7 @@ export async function getServerSideProps (context) {
       id: 3,
       question: 'Native token ni SparkPoint.',
       score: 3,
-      answer: 'SRK TOKEN',
+      answer: 'SRK',
       choices: ['SRK', 'SPT', 'SPPT', 'SKT']
     },
     {
@@ -255,7 +273,7 @@ export async function getServerSideProps (context) {
       id: 5,
       question: 'Definition of DApps.',
       score: 2,
-      answer: 'DECENTRALIZED APPS',
+      answer: 'Decentralized Apps',
       choices: [
         'Developed Apps',
         'Digital Apps',
@@ -267,7 +285,7 @@ export async function getServerSideProps (context) {
       id: 6,
       question: 'New game to be launched by MGG.',
       score: 3,
-      answer: 'METASAGA WARRIORS',
+      answer: 'Meta Saga Warriors',
       choices: [
         'Meta Game',
         'Saga Adventures',
@@ -279,7 +297,7 @@ export async function getServerSideProps (context) {
       id: 7,
       question: 'Meaning of POS.',
       score: 4,
-      answer: 'PROOF OF STAKE',
+      answer: 'Proof of Stake',
       choices: [
         'Point of Sale',
         'Proof of Stake',
@@ -291,7 +309,7 @@ export async function getServerSideProps (context) {
       id: 8,
       question: 'Meaning of POW.',
       score: 4,
-      answer: 'PROOF OF WORK',
+      answer: 'Proof of Work',
       choices: [
         'Proof of Work',
         'Person on Work',
@@ -303,7 +321,7 @@ export async function getServerSideProps (context) {
       id: 9,
       question: 'Meaning of NFT',
       score: 3,
-      answer: 'NON-FUNGIBLE TOKEN',
+      answer: 'Non Fungible Token',
       choices: [
         'Non Forgettable Token',
         'Non Feasible Target',
@@ -315,28 +333,28 @@ export async function getServerSideProps (context) {
       id: 10,
       question: 'Creator of Bitcoin',
       score: 5,
-      answer: 'SATOSHI NAKAMOTO',
+      answer: 'Satoshi Nakamoto',
       choices: ['Elon Musk', 'Satoshi Nakamoto', 'Michael Jordan', 'Yao Ming']
     },
     {
       id: 11,
       question: 'Most expensive crypto.',
       score: 3,
-      answer: 'BITCOIN',
+      answer: 'Bitcoin/BTC',
       choices: ['Ether/ETH', 'Matic', 'Bitcoin/BTC', 'SRK']
     },
     {
       id: 12,
       question: 'A decentralized digital ledger.',
       score: 5,
-      answer: 'BLOCKCHAIN',
+      answer: 'Blockchain',
       choices: ['Hardware Wallet', 'Ethereum', 'Bitcoin', 'Blockchain']
     },
     {
       id: 13,
       question: 'Physical device that stores crypto assets’ digital keys',
       score: 5,
-      answer: 'HARDWARE WALLET',
+      answer: 'Hardware Wallet',
       choices: [
         'Hardware Wallet',
         'Metamask Wallet',
@@ -370,8 +388,7 @@ export async function getServerSideProps (context) {
     },
     {
       id: 16,
-      question:
-        'Blocks in a blockchain are chained together by _____________. HASH VALUE',
+      question: 'Blocks in a blockchain are chained together by _____________.',
       score: 5,
       answer: 'Hash Value',
       choices: [
@@ -384,7 +401,7 @@ export async function getServerSideProps (context) {
     {
       id: 17,
       question:
-        'Used to build smart contracts and dApps on the Ethereum blockchain.',
+        'Used to build smart contracts and DApps on the Ethereum blockchain.',
       score: 5,
       answer: 'Solidity',
       choices: ['C++', 'C#', 'Solidity', 'Python']
@@ -392,7 +409,7 @@ export async function getServerSideProps (context) {
     {
       id: 18,
       question:
-        'Total percent of nodes that hackers should control if they want to disrupt a blockchain network. 51%.',
+        'Total percent of nodes that hackers should control if they want to disrupt a blockchain network.',
       score: 5,
       answer: '51%',
       choices: ['10%', '20%', '35%', '51%']
