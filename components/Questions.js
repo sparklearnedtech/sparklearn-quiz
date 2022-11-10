@@ -13,7 +13,12 @@ export default function Questions ({
   correct,
   showAns,
   randomizer,
-  numQuestions
+  setStatus,
+  status,
+  setTimerOn,
+  numQuestions,
+  btnStatus,
+  setBtnStatus
 }) {
   const numChoices = 4
   const [answer, setAnswer] = useState(currentQuestion?.answer)
@@ -28,13 +33,39 @@ export default function Questions ({
   const answerChecker = e => {
     if (e.target.textContent === answer) {
       console.log('correct')
+      setStatus(true)
       correct()
     } else {
-      setActiveQuestion(activeQuestion + 1)
+      setTimerOn(false)
+      setStatus(false)
+      setBtnStatus('btn-disabled')
+      setTimeout(() => {
+        setActiveQuestion(activeQuestion + 1)
+      }, 2000)
     }
   }
   return (
     <div className='text-center'>
+      <span
+        className={
+          typeof status === 'undefined'
+            ? btnStatus === 'btn-disabled'
+              ? 'status wrong'
+              : ''
+            : status
+            ? 'status correct'
+            : 'status wrong'
+        }
+      >
+        {typeof status === 'undefined'
+          ? btnStatus === 'btn-disabled'
+            ? 'No Answer!'
+            : ''
+          : status
+          ? 'Correct answer!'
+          : 'Wrong answer!'}
+      </span>
+
       <div className='q-card d-flex'>
         {timer()}
         <div
@@ -53,7 +84,7 @@ export default function Questions ({
       <div className='d-flex j-content-center'>
         {choiceSet?.map(choice => (
           <button
-            className='btn-choices'
+            className={`btn-choices ${btnStatus}`}
             key={uuidV4()}
             onClick={e => answerChecker(e)}
           >

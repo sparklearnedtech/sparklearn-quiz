@@ -26,6 +26,8 @@ export default function Home ({ questions }) {
   const [timerOn, setTimerOn] = useState(true)
   const [timerKey, setTimerKey] = useState(0)
   const [showAns, setShowAns] = useState(false)
+  const [status, setStatus] = useState()
+  const [btnStatus, setBtnStatus] = useState('')
 
   const fetchLeaderboard = async () => {
     const result = await fetch('/api/leaderboard')
@@ -35,9 +37,13 @@ export default function Home ({ questions }) {
   }
 
   function correct () {
-    setActiveQuestion(activeQuestion + 1)
-    setScore(score + finalQuestionSet[activeQuestion].score)
-    console.log(finalQuestionSet[activeQuestion].score)
+    setTimerOn(false)
+    setBtnStatus('btn-disabled')
+    setTimeout(() => {
+      setActiveQuestion(activeQuestion + 1)
+      setScore(score + finalQuestionSet[activeQuestion].score)
+      console.log(finalQuestionSet[activeQuestion].score)
+    }, 2000)
   }
 
   function wrong () {
@@ -56,6 +62,10 @@ export default function Home ({ questions }) {
         onComplete={() => {
           wrong()
           console.log('Wrong')
+          setBtnStatus('btn-disabled')
+          setTimeout(() => {
+            setActiveQuestion(activeQuestion + 1)
+          }, 2000)
         }}
       >
         {renderTime}
@@ -80,6 +90,7 @@ export default function Home ({ questions }) {
   useEffect(() => {
     randomizer(numQ, questions, setFinalQuestionSet)
     fetchLeaderboard()
+    setBtnStatus('')
   }, [])
 
   useEffect(() => {
@@ -95,6 +106,9 @@ export default function Home ({ questions }) {
     }
     setShowAns(false)
     setTimerKey(timerKey + 1)
+    setTimerOn(true)
+    setStatus()
+    setBtnStatus('')
   }, [activeQuestion])
 
   const resetHandler = () => {
@@ -181,7 +195,12 @@ export default function Home ({ questions }) {
               correctAnswer={correctAnswer}
               setCorrectAnswer={setCorrectAnswer}
               showAns={showAns}
+              setStatus={setStatus}
+              status={status}
               randomizer={randomizer}
+              setTimerOn={setTimerOn}
+              btnStatus={btnStatus}
+              setBtnStatus={setBtnStatus}
             />
           </>
         ) : (
