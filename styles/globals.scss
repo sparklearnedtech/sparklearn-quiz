@@ -103,11 +103,18 @@ button {
 .btn-wrong,
 .btn-previous,
 .btn-disabled,
-.btn-next {
+.btn-next,
+.status {
   margin: 4px;
   padding: 12px 20px;
   width: 15rem;
   border-radius: 30px;
+}
+
+.status.correct,
+.status.wrong {
+  background-color: white;
+  border-radius: 10px;
 }
 
 .btn-choices {
@@ -116,12 +123,18 @@ button {
   background-color: rgb(8, 103, 135);
 }
 
-.btn-correct {
+.btn-correct,
+.status.correct {
+  font-weight: 700;
+  color: #ffffff;
   background-color: rgb(12, 241, 12);
   transition: 0.3s all ease-in-out;
 }
 
-.btn-wrong {
+.btn-wrong,
+.status.wrong {
+  font-weight: 700;
+  color: #ffffff;
   background-color: rgb(219, 37, 24);
   transition: 0.3s all ease-in-out;
 }
@@ -145,6 +158,7 @@ button {
 }
 
 .btn-disabled {
+  pointer-events: none;
   background-color: rgb(73, 73, 73);
   transition: 0.3s all ease-in-out;
 }
