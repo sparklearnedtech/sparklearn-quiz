@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 
+import { v4 as uuidV4 } from 'uuid'
+
 export default function Questions ({
   currentQuestion,
   setCorrectAnswer,
@@ -9,13 +11,28 @@ export default function Questions ({
   score,
   timer,
   correct,
-  showAns
+  showAns,
+  randomizer,
+  numQuestions
 }) {
+  const numChoices = 4
   const [answer, setAnswer] = useState(currentQuestion?.answer)
+  const [choiceSet, setChoiceSet] = useState()
 
   useEffect(() => {
     setAnswer(currentQuestion?.answer)
+    if (activeQuestion < numQuestions) {
+      randomizer(numChoices, currentQuestion.choices, setChoiceSet)
+    }
   }, [currentQuestion])
+  const answerChecker = e => {
+    if (e.target.textContent === answer) {
+      console.log('correct')
+      correct()
+    } else {
+      setActiveQuestion(activeQuestion + 1)
+    }
+  }
   return (
     <div className='text-center'>
       <div className='q-card d-flex'>
@@ -34,25 +51,15 @@ export default function Questions ({
       </div>
 
       <div className='d-flex j-content-center'>
-        <button
-          className={`d-block mx-auto ${
-            showAns ? 'btn-disabled' : 'btn-correct'
-          }`}
-          disabled={showAns}
-          onClick={() => {
-            correct()
-          }}
-        >
-          Correct
-        </button>
-        <button
-          className='d-block mx-auto btn-wrong'
-          onClick={() => {
-            setActiveQuestion(activeQuestion + 1)
-          }}
-        >
-          Next
-        </button>
+        {choiceSet?.map(choice => (
+          <button
+            className='btn-choices'
+            key={uuidV4()}
+            onClick={e => answerChecker(e)}
+          >
+            {choice}
+          </button>
+        ))}
       </div>
     </div>
   )
