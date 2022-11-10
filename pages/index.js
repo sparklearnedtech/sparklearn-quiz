@@ -78,7 +78,7 @@ export default function Home ({ questions }) {
   }
 
   useEffect(() => {
-    fetchQuestions()
+    randomizer(numQ, questions, setFinalQuestionSet)
     fetchLeaderboard()
   }, [])
 
@@ -90,7 +90,7 @@ export default function Home ({ questions }) {
       })
       console.log('Finished')
 
-      fetchQuestions()
+      randomizer(numQ, questions, setFinalQuestionSet)
       setGameFinished(true)
     }
     setShowAns(false)
@@ -98,7 +98,6 @@ export default function Home ({ questions }) {
   }, [activeQuestion])
 
   const resetHandler = () => {
-    console.log('test')
     setGameStart(false)
     setGameFinished(false)
     setNickname('')
@@ -113,36 +112,34 @@ export default function Home ({ questions }) {
     setGameStart(true)
   }
 
-  const fetchQuestions = () => {
-    let questionSet = []
+  const randomizer = (numItems, items, setter) => {
+    let itemSet = []
 
-    const baseIndex = Math.floor(Math.random() * questions.length)
+    const baseIndex = Math.floor(Math.random() * items?.length)
 
     let j = baseIndex
 
     let k = 0
 
-    for (let i = 0; i < numQ; i++) {
-      if (i + j > questions.length - 1) {
-        questionSet[i] = questions[k++]
+    for (let i = 0; i < numItems; i++) {
+      if (i + j > items?.length - 1) {
+        itemSet[i] = items[k++]
       } else {
-        questionSet[i] = questions[i + j]
+        itemSet[i] = items[i + j]
       }
     }
 
     for (let k = 0; k < 1000; k++) {
-      let randNum = Math.floor(Math.random() * questionSet.length)
+      let randNum = Math.floor(Math.random() * itemSet.length)
 
-      let temp = questionSet[0]
+      let temp = itemSet[0]
 
-      questionSet[0] = questionSet[randNum]
-      questionSet[randNum] = temp
+      itemSet[0] = itemSet[randNum]
+      itemSet[randNum] = temp
     }
-
-    setFinalQuestionSet(questionSet)
+    setter(itemSet)
   }
 
-  // console.log(finalQuestionSet[0]);
   return (
     <div className={styles.container}>
       <Head>
@@ -173,6 +170,7 @@ export default function Home ({ questions }) {
           <>
             <CurrentScore nickname={nickname} score={score} />
             <Questions
+              numQuestions={numQ}
               currentQuestion={finalQuestionSet[activeQuestion]}
               activeQuestion={activeQuestion}
               setActiveQuestion={setActiveQuestion}
@@ -183,6 +181,7 @@ export default function Home ({ questions }) {
               correctAnswer={correctAnswer}
               setCorrectAnswer={setCorrectAnswer}
               showAns={showAns}
+              randomizer={randomizer}
             />
           </>
         ) : (
