@@ -224,11 +224,10 @@ export default function Home ({ questions }) {
         <div className='d-flex j-content-center'>
           <Marquee
             style={{
-              color: 'white',
               position: 'absolute',
               bottom: '40px',
-              backgroundColor: '#fff213',
-              color: 'red'
+              backgroundColor: '#ffffff',
+              color: '#2c6484'
             }}
           >
             <h1>
