@@ -164,80 +164,86 @@ export default function Home ({ questions }) {
   }
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>SparkLearn EdTech Quiz</title>
-        <meta name='description' content='Quiz for SparkLearn EdTech Booth' />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-      <main>
-        <div className='d-flex j-content-center'>
-          <h1
-            style={{ position: 'absolute', top: '20px', color: 'white' }}
-            className='text-center title-text'
-          >
+    <>
+      <div className='d-flex j-content-center'>
+        <div style={{ position: 'absolute', top: '20px', color: 'white' }}>
+          <Image
+            src='/assets/main-brand.webp'
+            alt='Logo'
+            height={60}
+            width={200}
+          />
+          <h1 className='text-center title-text' style={{ margin: 0 }}>
             BlockQuiz
           </h1>
         </div>
-
-        <Leaderboard topPlayers={leaderboard} />
-        {!gameStart && !gameFinished ? (
-          <Register
-            nickname={nickname}
-            email={email}
-            handleGameStatus={handleGameStatus}
-            setEmail={setEmail}
-            setNickname={setNickname}
-          />
-        ) : !gameFinished ? (
-          <>
-            <CurrentScore nickname={nickname} score={score} />
-            <Questions
-              numQuestions={numQ}
-              currentQuestion={finalQuestionSet[activeQuestion]}
-              activeQuestion={activeQuestion}
-              setActiveQuestion={setActiveQuestion}
-              setScore={setScore}
-              score={score}
-              wrong={wrong}
-              timer={UrgeWithPleasureComponent}
-              correct={correct}
-              correctAnswer={correctAnswer}
-              setCorrectAnswer={setCorrectAnswer}
-              showAns={showAns}
-              setStatus={setStatus}
-              status={status}
-              randomizer={randomizer}
-              setTimerOn={setTimerOn}
-              btnStatus={btnStatus}
-              level={level}
-              setBtnStatus={setBtnStatus}
+      </div>
+      <div className={styles.container}>
+        <Head>
+          <title>SparkLearn EdTech Quiz</title>
+          <meta name='description' content='Quiz for SparkLearn EdTech Booth' />
+          <link rel='icon' href='/favicon.ico' />
+        </Head>
+        <main>
+          <Leaderboard topPlayers={leaderboard} />
+          {!gameStart && !gameFinished ? (
+            <Register
+              nickname={nickname}
+              email={email}
+              handleGameStatus={handleGameStatus}
+              setEmail={setEmail}
+              setNickname={setNickname}
             />
-          </>
-        ) : (
-          <FinalScore
-            finalScore={score}
-            nickname={nickname}
-            resetHandler={resetHandler}
-          />
-        )}
-        <div className='d-flex j-content-center'>
-          <Marquee
-            style={{
-              position: 'absolute',
-              bottom: '40px',
-              backgroundColor: '#ffffff',
-              color: '#2c6484'
-            }}
-          >
-            <h1>
-              20,000 SRK TOKEN GRAND PRIZE | 20,000 SRK TOKEN GRAND PRIZE |
-              20,000 SRK TOKEN GRAND PRIZE | 20,000 SRK TOKEN&nbsp;
-            </h1>
-          </Marquee>
-        </div>
-      </main>
-    </div>
+          ) : !gameFinished ? (
+            <>
+              <CurrentScore nickname={nickname} score={score} />
+              <Questions
+                numQuestions={numQ}
+                currentQuestion={finalQuestionSet[activeQuestion]}
+                activeQuestion={activeQuestion}
+                setActiveQuestion={setActiveQuestion}
+                setScore={setScore}
+                score={score}
+                wrong={wrong}
+                timer={UrgeWithPleasureComponent}
+                correct={correct}
+                correctAnswer={correctAnswer}
+                setCorrectAnswer={setCorrectAnswer}
+                showAns={showAns}
+                setStatus={setStatus}
+                status={status}
+                randomizer={randomizer}
+                setTimerOn={setTimerOn}
+                btnStatus={btnStatus}
+                level={level}
+                setBtnStatus={setBtnStatus}
+              />
+            </>
+          ) : (
+            <FinalScore
+              finalScore={score}
+              nickname={nickname}
+              resetHandler={resetHandler}
+            />
+          )}
+          <div className='d-flex j-content-center'>
+            <Marquee
+              style={{
+                position: 'absolute',
+                bottom: '40px',
+                backgroundColor: '#ffffff',
+                color: '#2c6484'
+              }}
+            >
+              <h1>
+                20,000 SRK TOKEN GRAND PRIZE | 20,000 SRK TOKEN GRAND PRIZE |
+                20,000 SRK TOKEN GRAND PRIZE | 20,000 SRK TOKEN&nbsp;
+              </h1>
+            </Marquee>
+          </div>
+        </main>
+      </div>
+    </>
   )
 }
 
