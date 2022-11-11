@@ -168,9 +168,9 @@ export default function Home ({ questions }) {
       <div className='d-flex j-content-center'>
         <div style={{ position: 'absolute', top: '20px', color: 'white' }}>
           <Image
-            src='/assets/main-brand.webp'
+            src='/assets/white_wLogo.png'
             alt='Logo'
-            height={60}
+            height={45}
             width={200}
           />
           <h1 className='text-center title-text' style={{ margin: 0 }}>
