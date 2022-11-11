@@ -230,8 +230,8 @@ export default function Home ({ questions }) {
             }}
           >
             <h1>
-              10,000 SRK TOKEN GRAND PRIZE | 10,000 SRK TOKEN GRAND PRIZE |
-              10,000 SRK TOKEN GRAND PRIZE | 10,000 SRK TOKEN
+              20,000 SRK TOKEN GRAND PRIZE | 20,000 SRK TOKEN GRAND PRIZE |
+              20,000 SRK TOKEN GRAND PRIZE | 20,000 SRK TOKEN&nbsp;
             </h1>
           </Marquee>
         </div>
