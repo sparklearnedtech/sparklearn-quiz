@@ -30,6 +30,7 @@ h1.title-text {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 9vh;
   letter-spacing: 0.1em;
+  line-height: 0.8;
 }
 
 h3.text-white {
@@ -128,7 +129,7 @@ button:hover {
 .btn-disabled,
 .btn-next,
 .status {
-  margin: 4px;
+margin: 4px;
   padding: 12px 20px;
   width: 15rem;
   border-radius: 30px;
