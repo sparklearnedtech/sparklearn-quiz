@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
+
 html,
 body {
   padding: 0;
@@ -21,6 +23,18 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+h1.title-text {
+  font-family: Paytone One, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 9vh;
+  letter-spacing: 0.1em;
+  line-height: 0.8;
+}
+
+h3.text-white {
+  color: white;
 }
 
 .d-block {
@@ -75,6 +89,16 @@ button {
   padding: 10px 10px;
   background-color: rgb(229, 96, 0);
   border-radius: 20px;
+  transition: all ease-in-out 0.3s;
+}
+
+input:focus {
+  outline: 2px solid rgb(229, 96, 0);
+}
+
+button:hover {
+  background-color: rgb(210, 82, 3);
+  transition: all ease-in-out 0.3s;
 }
 
 .points {
@@ -105,7 +129,7 @@ button {
 .btn-disabled,
 .btn-next,
 .status {
-  margin: 4px;
+margin: 4px;
   padding: 12px 20px;
   width: 15rem;
   border-radius: 30px;
@@ -118,8 +142,10 @@ button {
 }
 
 .btn-choices {
-  font-size: 100%;
+  font-size: calc(100% + 0.5vh);
   font-weight: 600;
+  width: 23%;
+  padding: 20px 10px;
   background-color: rgb(8, 103, 135);
 }
 

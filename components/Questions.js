@@ -12,9 +12,11 @@ export default function Questions ({
   timer,
   correct,
   showAns,
+  wrong,
   randomizer,
   setStatus,
   status,
+  level,
   setTimerOn,
   numQuestions,
   btnStatus,
@@ -39,6 +41,7 @@ export default function Questions ({
       setTimerOn(false)
       setStatus(false)
       setBtnStatus('btn-disabled')
+      wrong()
       setTimeout(() => {
         setActiveQuestion(activeQuestion + 1)
       }, 2000)
@@ -73,8 +76,7 @@ export default function Questions ({
           className={'j-content-center'}
         >
           <h3 className='points'>
-            {currentQuestion?.score}{' '}
-            {currentQuestion?.score > 1 ? 'Points' : 'Point'}
+            Level: {level === 0 ? 'Easy' : level === 1 ? 'Intermediate' : 'Hard'}
           </h3>
           <h2 className='d-block'>{currentQuestion?.question}</h2>
           {showAns ? currentQuestion?.answer : ''}
