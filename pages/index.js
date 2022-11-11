@@ -11,7 +11,8 @@ import Marquee from 'react-fast-marquee'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 export default function Home ({ questions }) {
-  const numQ = 10
+  const [level, setLevel] = useState(0)
+  const numQ = 5
   const [finalQuestionSet, setFinalQuestionSet] = useState({})
   const [activeQuestion, setActiveQuestion] = useState(0)
   const [email, setEmail] = useState('')
@@ -19,7 +20,6 @@ export default function Home ({ questions }) {
   const [score, setScore] = useState(0)
   const [gameStart, setGameStart] = useState(false)
   const [gameFinished, setGameFinished] = useState(false)
-
   const [correctAnswer, setCorrectAnswer] = useState()
   const [leaderboard, setLeaderboard] = useState({})
   const [timeLeft, setTimeLeft] = useState(10)
@@ -88,20 +88,29 @@ export default function Home ({ questions }) {
   }
 
   useEffect(() => {
-    randomizer(numQ, questions, setFinalQuestionSet)
+    randomizer(numQ, questions[level], setFinalQuestionSet)
     fetchLeaderboard()
     setBtnStatus('')
   }, [])
 
   useEffect(() => {
-    if (activeQuestion >= numQ) {
+    randomizer(numQ, questions[level], setFinalQuestionSet)
+    setBtnStatus('')
+  }, [level])
+
+  useEffect(() => {
+    if (activeQuestion >= numQ && level !== 2) {
+      setLevel(level + 1)
+      setActiveQuestion(0)
+      randomizer(numQ, questions[level], setFinalQuestionSet)
+    } else if (activeQuestion >= numQ && level === 2) {
       fetch('/api/save', {
         method: 'POST',
         body: JSON.stringify({ nickname, email, score })
       })
       console.log('Finished')
 
-      randomizer(numQ, questions, setFinalQuestionSet)
+      randomizer(numQ, questions[level], setFinalQuestionSet)
       setGameFinished(true)
     }
     setShowAns(false)
