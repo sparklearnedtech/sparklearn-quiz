@@ -199,6 +199,7 @@ export default function Home ({ questions }) {
               setActiveQuestion={setActiveQuestion}
               setScore={setScore}
               score={score}
+              wrong={wrong}
               timer={UrgeWithPleasureComponent}
               correct={correct}
               correctAnswer={correctAnswer}
@@ -209,6 +210,7 @@ export default function Home ({ questions }) {
               randomizer={randomizer}
               setTimerOn={setTimerOn}
               btnStatus={btnStatus}
+              level={level}
               setBtnStatus={setBtnStatus}
             />
           </>
