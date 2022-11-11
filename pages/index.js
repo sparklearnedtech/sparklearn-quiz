@@ -174,9 +174,9 @@ export default function Home ({ questions }) {
         <div className='d-flex j-content-center'>
           <h1
             style={{ position: 'absolute', top: '20px', color: 'white' }}
-            className='text-center'
+            className='text-center title-text'
           >
-            Test Your Blockchain Knowledge!
+            BlockQuiz
           </h1>
         </div>
 
