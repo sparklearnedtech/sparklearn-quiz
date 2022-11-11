@@ -141,8 +141,10 @@ button:hover {
 }
 
 .btn-choices {
-  font-size: 100%;
+  font-size: calc(100% + 0.5vh);
   font-weight: 600;
+  width: 23%;
+  padding: 20px 10px;
   background-color: rgb(8, 103, 135);
 }
 
